@@ -1,18 +1,28 @@
 const express = require("express");
 const mysql = require("mysql2");
 const PORT = 3000;
+const cors = require("cors");
+
 const app = express();
 // db connectionconst
+
+// middlewares
+app.use(cors());
+app.use(express.json());
+
 database = mysql.createConnection({
   database: "demoapp",
-  user: "root",
-  password: "test",
+  user: "demoapp",
+  password: "test",from your local machine terminal):
   host: "localhost",
 });
 database.connect((err) => {
   console.log("database connected sucessfully");
 });
-app.use(express.json());
+
+
+
+
 // get requiest
 app.post("/", (req, res) => {
   console.log(req.body);
@@ -20,9 +30,7 @@ app.post("/", (req, res) => {
 });
 // responseconst
 response = { message: "successfully sent" };
-// post request
 app.get("/", (req, res) => {
-  console.log(req.body);
   res.send("i am on send me something");
 });
 app.post("/add-employment", (req, res) => {
@@ -41,6 +49,8 @@ app.post("/add-employment", (req, res) => {
   );
   res.status(200).json(response);
 });
+
+// login
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   const sql = ` SELECT password from employee_test where email = ?;`;
@@ -48,11 +58,10 @@ app.post("/login", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result[0].password);
       if (result[0].password == password) {
-        res.send("user logedin sucessfully");
+        res.status(200).json("logedin sucessfully");
       } else {
-        res.send("you have used wrong password");
+        res.status(401).json("wrong email adress");
       }
     }
   });
