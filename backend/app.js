@@ -13,8 +13,8 @@ app.use(express.json());
 database = mysql.createConnection({
   database: "demoapp",
   user: "demoapp",
-  password: "test",from your local machine terminal):
-  host: "localhost",
+  password: "test",
+  host: "127.0.0.1",
 });
 database.connect((err) => {
   console.log("database connected sucessfully");
