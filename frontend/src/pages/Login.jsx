@@ -3,6 +3,7 @@ import { useState } from "react";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [logedin, setlogedin] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
@@ -18,11 +19,16 @@ function Login() {
       body: JSON.stringify(data),
     };
     const response = fetch(apiUrl, requestOption);
-    response.then((res) => res.json()).then((res) => console.log(res));
+    response
+      .then((res) => res.json())
+      .then((res) => {
+        setlogedin(res);
+      });
   }
   return (
     <>
       <h1>Login</h1>
+      <h2 style={{ color: "red" }}>{logedin}</h2>
       <form action="" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input

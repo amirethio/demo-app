@@ -24,16 +24,14 @@ function AddEmployee() {
       body: JSON.stringify(data),
     };
 
-    const response = fetch(apiUrl , requestOption)
-    response.then(res => res.json()
-    ).then(res=>console.log(res));
+    const response = fetch(apiUrl, requestOption);
+    response.then((res) => res.json()).then((res) => console.log(res));
   }
   return (
     <>
       <div>AddEmployee form</div>
       <form action="" onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name</label>
-        <br />
         <input
           type="text"
           id="fname"
@@ -42,9 +40,8 @@ function AddEmployee() {
             setFirstName(event.target.value);
           }}
         />
-        <br />
+
         <label htmlFor="lname">Last Name</label>
-        <br />
         <input
           type="text"
           id="lname"
@@ -53,9 +50,8 @@ function AddEmployee() {
             setlastName(event.target.value);
           }}
         />
-        <br />
+
         <label htmlFor="email">Email</label>
-        <br />
         <input
           type="email"
           name="email"
@@ -64,9 +60,8 @@ function AddEmployee() {
             setEmail(event.target.value);
           }}
         />
-        <br />
+
         <label htmlFor="Pass">Password</label>
-        <br />
         <input
           type="password"
           name="password"
@@ -75,7 +70,7 @@ function AddEmployee() {
             setPassword(event.target.value);
           }}
         />
-        <br />
+
         <button type="submit">Submit form</button>
       </form>
       {/* {console.log(firstName)} */}

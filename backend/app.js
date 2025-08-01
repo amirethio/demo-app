@@ -1,25 +1,18 @@
 const express = require("express");
-const mysql = require("mysql2");
-const PORT = 3000;
 const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
-// db connectionconst
+const database = require("./config/db.config");
+
+
+// import routes
+const all_router =  require("./routes/index.route")
+
 
 // middlewares
 app.use(cors());
 app.use(express.json());
-
-database = mysql.createConnection({
-  database: "demoapp",
-  user: "demoapp",
-  password: "test",
-  host: "127.0.0.1",
-});
-database.connect((err) => {
-  console.log("database connected sucessfully");
-});
-
+app.use(all_router)
 
 
 
@@ -33,39 +26,12 @@ response = { message: "successfully sent" };
 app.get("/", (req, res) => {
   res.send("i am on send me something");
 });
-app.post("/add-employment", (req, res) => {
-  const { first_name, last_name, email, password } = req.body;
-  const sql = `INSERT INTO employee_test(first_name, last_name, email, password) VALUES(? ,?,?,?)`;
-  database.query(
-    sql,
-    [first_name, last_name, email, password],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("✅ Employee inserted:");
-      }
-    }
-  );
-  res.status(200).json(response);
-});
 
-// login
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const sql = ` SELECT password from employee_test where email = ?;`;
-  database.query(sql, [email], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      if (result[0].password == password) {
-        res.status(200).json("logedin sucessfully");
-      } else {
-        res.status(401).json("wrong email adress");
-      }
-    }
-  });
-});
+
+
+
+
+const PORT = process.env.PORT;
 // server is running
 app.listen(PORT, () => {
   console.log(`app is running on port http://localhost:${PORT}`);
