@@ -5,6 +5,7 @@ function AddEmployee() {
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [state , setstate] = useState('')
 
   //   console.log(firstName , lastName , email , password)
 
@@ -17,7 +18,7 @@ function AddEmployee() {
       email: email,
       password: password,
     };
-    const apiUrl = "http://localhost:3000/add-employment";
+    const apiUrl = "http://52.23.211.123:3000/add-employment";
     const requestOption = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,11 +26,12 @@ function AddEmployee() {
     };
 
     const response = fetch(apiUrl, requestOption);
-    response.then((res) => res.json()).then((res) => console.log(res));
+    response.then((res) => res.json()).then((res) => setstate(res));
   }
   return (
     <>
       <div>AddEmployee form</div>
+      <p>{state}</p>
       <form action="" onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name</label>
         <input

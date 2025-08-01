@@ -12,7 +12,7 @@ function Login() {
     };
     console.log(data);
 
-    const apiUrl = "http://localhost:3000/login";
+    const apiUrl = "http://52.23.211.123:3000/login";
     const requestOption = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,6 +23,7 @@ function Login() {
       .then((res) => res.json())
       .then((res) => {
         setlogedin(res);
+        // console.log(res)
       });
   }
   return (
